@@ -1,0 +1,24 @@
+# HTTP-Server settings
+server:
+  port: 8080
+    
+spring:
+  jackson:
+    serialization:
+      indent-output: true    
+  thymeleaf:
+    mode: HTML
+      
+logging:
+  level:
+    org: warn 
+    org.elasticsearch: info
+    de.arp:  debug
+  pattern:
+    console: "%-5level %d{yyyy-MM-dd HH:mm:ss} %logger{36} - %msg%n"
+
+henni:
+    appSecret: test
+    verifyToken: test
+    pageAccessToken: test
+
