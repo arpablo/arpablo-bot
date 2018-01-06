@@ -11,8 +11,6 @@ import org.springframework.context.annotation.Configuration;
 
 import com.github.messenger4j.Messenger;
 
-import de.arpablo.hennibot.model.HenniRequest;
-
 /**
  * @author arpablo
  *
@@ -27,10 +25,9 @@ public class MessengerConfig {
 	private HenniProperties henniProperties;
 	
 	@Bean
-	public HenniRequest getRequest() {
+	public Messenger getRequest() {
 		log.info(henniProperties.toString());
-		Messenger.create(henniProperties.getPageAccessToken(), henniProperties.getAppSecret(), henniProperties.getVerifyToken());
-		return new HenniRequest();
+		return Messenger.create(henniProperties.getPageAccessToken(), henniProperties.getAppSecret(), henniProperties.getVerifyToken());
 	}
 	
 	
