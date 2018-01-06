@@ -41,7 +41,7 @@ public class MessengerCallbackController {
 	
 	@GetMapping
 	public ResponseEntity<String> verify(@RequestParam(name="hub.mode") String mode, @RequestParam(name="hub.verify_token") String verifyToken, @RequestParam(name="hub.challenge") String challenge) {
-		log.debug("Received Webhook verification request - mode: {} | verifyToken: {} | challenge: {}", mode, verifyToken, challenge);
+		log.info("Received Webhook verification request - mode: {} | verifyToken: {} | challenge: {}", mode, verifyToken, challenge);
 		try {
 			messenger.verifyWebhook(mode, verifyToken);
 			return ResponseEntity.ok(challenge);
@@ -53,6 +53,8 @@ public class MessengerCallbackController {
 	
 	@PostMapping
 	public ResponseEntity<Void> handleMessage(@RequestBody String requestPayload, Optional<String> signature) {
+		log.info("Received POST request with payload");
+		log.info(requestPayload);
 		try {
 			messenger.onReceiveEvents(requestPayload, signature, event -> {
 				if (event.isTextMessageEvent()) {
