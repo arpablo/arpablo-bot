@@ -52,7 +52,7 @@ public class MessengerCallbackController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Void> handleMessage(@RequestBody String requestPayload, Optional<String> signature) {
+	public ResponseEntity<Void> handleMessage(@RequestBody String requestPayload, @RequestParam(name="X-Hub-Signature") Optional<String> signature) {
 		log.info("Received POST request with payload");
 		log.info(requestPayload);
 		try {
