@@ -18,7 +18,7 @@ logging:
     console: "%-5level %d{yyyy-MM-dd HH:mm:ss} %logger{36} - %msg%n"
 
 henni:
-    appSecret: 99178de3623c9dfb67ff6e79a792c1eb
+    appSecret: 7462dff391dfa35dee19c8088442ccdb
     verifyToken: retgdkfjsjklsklj34qdfs
-    pageAccessToken: 1811874862443102
+    pageAccessToken: 307276146449455
 
