@@ -43,7 +43,7 @@ public class MessengerCallbackController {
 		log.debug("Received Webhook verification request - mode: {} | verifyToken: {} | challenge: {}", mode, verifyToken, challenge);
 		try {
 			messenger.verifyWebhook(mode, verifyToken);
-			return ResponseEntity.ok("ok");
+			return ResponseEntity.ok(challenge);
 		} catch (MessengerVerificationException e) {
 			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
