@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.github.messenger4j.Messenger;
@@ -38,8 +39,8 @@ public class MessengerCallbackController {
 	private HenniService service;
 	
 	@GetMapping
-	public ResponseEntity<String> verify(String mode, String verifyToken) {
-		log.debug("Received Webhook verification request - mode: {} | verifyToken: {}", mode, verifyToken);
+	public ResponseEntity<String> verify(@RequestParam(name="hub.mode") String mode, @RequestParam(name="hub.verify_token") String verifyToken, @RequestParam(name="hub.challenge") String challenge) {
+		log.debug("Received Webhook verification request - mode: {} | verifyToken: {} | challenge: {}", mode, verifyToken, challenge);
 		try {
 			messenger.verifyWebhook(mode, verifyToken);
 			return ResponseEntity.ok("ok");
