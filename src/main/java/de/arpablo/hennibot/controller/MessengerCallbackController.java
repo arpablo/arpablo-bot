@@ -53,11 +53,11 @@ public class MessengerCallbackController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Void> handleMessage(@RequestBody String requestPayload, @RequestHeader(name="X-Hub-Signature") Optional<String> signature) {
+	public ResponseEntity<Void> handleMessage(@RequestBody String requestPayload, @RequestHeader(name="X-Hub-Signature") String signature) {
 		log.info("Received POST request with payload");
 		log.info(requestPayload);
 		try {
-			messenger.onReceiveEvents(requestPayload, signature, event -> {
+			messenger.onReceiveEvents(requestPayload, Optional.empty(), event -> {
 				if (event.isTextMessageEvent()) {
 					service.processTextMessage(event.asTextMessageEvent());
 				}
