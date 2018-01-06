@@ -31,7 +31,7 @@ public class HenniService {
 
 	public void processTextMessage(TextMessageEvent event) {
 		String senderId = event.senderId();
-		final TextMessage textMessage = TextMessage.create("I got a text message");
+		final TextMessage textMessage = TextMessage.create("Ich will Henni ficken! JETZT!!!");
         final MessagePayload messagePayload = MessagePayload.create(senderId, textMessage);
 		try {
 			messenger.send(messagePayload);
