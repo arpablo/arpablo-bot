@@ -56,8 +56,9 @@ public class MessengerCallbackController {
 	public ResponseEntity<Void> handleMessage(@RequestBody String requestPayload, @RequestHeader(name="X-Hub-Signature") String signature) {
 		log.info("Received POST request with payload");
 		log.info(requestPayload);
+		log.info(signature);
 		try {
-			messenger.onReceiveEvents(requestPayload, Optional.empty(), event -> {
+			messenger.onReceiveEvents(requestPayload, Optional.of(signature), event -> {
 				if (event.isTextMessageEvent()) {
 					service.processTextMessage(event.asTextMessageEvent());
 				}
