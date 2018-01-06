@@ -3,8 +3,6 @@
  */
 package de.arpablo.hennibot.controller;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -21,6 +19,7 @@ import com.github.messenger4j.Messenger;
 import com.github.messenger4j.exception.MessengerVerificationException;
 
 import de.arpablo.hennibot.service.HenniService;
+
 
 /**
  * @author arpablo
