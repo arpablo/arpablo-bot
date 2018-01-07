@@ -18,7 +18,7 @@ public class HenniController {
 		return "index";
 	}
 
-	@GetMapping("/image/{image}")
+	@GetMapping("/images/{image}")
 	public String image() {
 		return "image";
 	}
