@@ -32,11 +32,22 @@ public class HenniService {
 
 	public void processTextMessage(TextMessageEvent event) {
 		String senderId = event.senderId();
+		String text = event.text();
 		try {
 			UserProfile profile = messenger.queryUserProfile(senderId);
-			final TextMessage textMessage = TextMessage.create(String.format("Hallo %s! Ich will Dich ficken! JETZT!!!", profile.firstName()));
-	        final MessagePayload messagePayload = MessagePayload.create(senderId, textMessage);
-			messenger.send(messagePayload);
+			if (text.equalsIgnoreCase("lecken")) {
+				final TextMessage textMessage = TextMessage.create(String.format("Ok %s! Dann lecke ich Dich jetzt!!!", profile.firstName()));
+		        final MessagePayload messagePayload = MessagePayload.create(senderId, textMessage);
+				messenger.send(messagePayload);
+			} else if (text.equalsIgnoreCase("anbohren")) {
+				final TextMessage textMessage = TextMessage.create(String.format("Hallo %s! Dann bohre ich Dich jetzt an!!!", profile.firstName()));
+		        final MessagePayload messagePayload = MessagePayload.create(senderId, textMessage);
+				messenger.send(messagePayload);
+			} else {
+				final TextMessage textMessage = TextMessage.create(String.format("Hallo %s! Du sillst ficken? JETZT??? Soll ich Dich lecken oder anbohren?", profile.firstName()));
+		        final MessagePayload messagePayload = MessagePayload.create(senderId, textMessage);
+				messenger.send(messagePayload);
+			}
 		} catch (MessengerApiException | MessengerIOException e) {
 			log.error(e.getMessage(), e);
 		}
