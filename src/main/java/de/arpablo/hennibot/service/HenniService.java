@@ -34,7 +34,7 @@ public class HenniService {
 		String senderId = event.senderId();
 		try {
 			UserProfile profile = messenger.queryUserProfile(senderId);
-			final TextMessage textMessage = TextMessage.create(String.format("Hallo %s!Ich will Dich ficken! JETZT!!!", profile.firstName()));
+			final TextMessage textMessage = TextMessage.create(String.format("Hallo %s! Ich will Dich ficken! JETZT!!!", profile.firstName()));
 	        final MessagePayload messagePayload = MessagePayload.create(senderId, textMessage);
 			messenger.send(messagePayload);
 		} catch (MessengerApiException | MessengerIOException e) {
