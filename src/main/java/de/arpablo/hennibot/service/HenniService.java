@@ -44,6 +44,9 @@ public class HenniService {
 		        final MessagePayload messagePayload = MessagePayload.create(senderId, textMessage);
 				messenger.send(messagePayload);
 			} else {
+				final TextMessage textMessage1 = TextMessage.create(String.format("https://henni-bot-app.herokuapp.com/images/henni", profile.firstName()));
+		        final MessagePayload messagePayload1 = MessagePayload.create(senderId, textMessage1);
+				messenger.send(messagePayload1);
 				final TextMessage textMessage = TextMessage.create(String.format("Hallo %s! Du willst ficken? JETZT??? Soll ich Dich lecken oder anbohren?", profile.firstName()));
 		        final MessagePayload messagePayload = MessagePayload.create(senderId, textMessage);
 				messenger.send(messagePayload);
