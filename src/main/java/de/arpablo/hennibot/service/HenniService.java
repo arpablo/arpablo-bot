@@ -13,6 +13,7 @@ import com.github.messenger4j.exception.MessengerApiException;
 import com.github.messenger4j.exception.MessengerIOException;
 import com.github.messenger4j.send.MessagePayload;
 import com.github.messenger4j.send.message.TextMessage;
+import com.github.messenger4j.userprofile.UserProfile;
 import com.github.messenger4j.webhook.event.AttachmentMessageEvent;
 import com.github.messenger4j.webhook.event.TextMessageEvent;
 
@@ -31,9 +32,10 @@ public class HenniService {
 
 	public void processTextMessage(TextMessageEvent event) {
 		String senderId = event.senderId();
-		final TextMessage textMessage = TextMessage.create(String.format("Hallo %s!Ich will Dich ficken! JETZT!!!", senderId));
-        final MessagePayload messagePayload = MessagePayload.create(senderId, textMessage);
 		try {
+			UserProfile profile = messenger.queryUserProfile(senderId);
+			final TextMessage textMessage = TextMessage.create(String.format("Hallo %s!Ich will Dich ficken! JETZT!!!", profile.firstName()));
+	        final MessagePayload messagePayload = MessagePayload.create(senderId, textMessage);
 			messenger.send(messagePayload);
 		} catch (MessengerApiException | MessengerIOException e) {
 			log.error(e.getMessage(), e);
