@@ -13,4 +13,5 @@ import lombok.Data;
 public class HenniRequest {
 
 	private String request;
+
 }
