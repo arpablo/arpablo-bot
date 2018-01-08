@@ -68,6 +68,9 @@ public class MessengerCallbackController {
 				else if (event.isAccountLinkingEvent()) {
 					event.asAccountLinkingEvent();
 				}
+				else if (event.isPostbackEvent()) {
+					service.processPostbackMessage(event.asPostbackEvent());
+				}
 				else {
 					log.info("Event not handled");;
 				}

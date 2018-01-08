@@ -29,6 +29,7 @@ import com.github.messenger4j.send.message.template.button.Button;
 import com.github.messenger4j.send.message.template.button.PostbackButton;
 import com.github.messenger4j.userprofile.UserProfile;
 import com.github.messenger4j.webhook.event.AttachmentMessageEvent;
+import com.github.messenger4j.webhook.event.PostbackEvent;
 import com.github.messenger4j.webhook.event.TextMessageEvent;
 
 /**
@@ -98,6 +99,43 @@ public class HenniService {
 	}
 
 	public void processAttachmentMessage(AttachmentMessageEvent event) {
+	}
+	
+	public void processPostbackMessage(PostbackEvent event) {
+		String senderId = event.senderId();
+		Optional<String> eventPayload = event.payload();
+		try {
+			if (eventPayload.isPresent()) {
+				UserProfile profile = messenger.queryUserProfile(senderId);
+				String text = eventPayload.get();
+				if (text.equalsIgnoreCase("lecken")) {
+					final TextMessage textMessage = TextMessage.create(String.format("Ok %s! Dann lecke ich Dich jetzt!!!", profile.firstName()));
+			        final MessagePayload messagePayload = MessagePayload.create(senderId, textMessage);
+					messenger.send(messagePayload);
+				} else if (text.equalsIgnoreCase("ficken")) {
+					final TextMessage textMessage = TextMessage.create(String.format("Hallo %s! Dann bohre ich Dich jetzt an!!!", profile.firstName()));
+			        final MessagePayload messagePayload = MessagePayload.create(senderId, textMessage);
+					messenger.send(messagePayload);
+				} else if (text.equalsIgnoreCase("gucken")) {
+					final NotificationType notificationType = NotificationType.NO_PUSH;
+					Optional<NotificationType> oNf = Optional.of(notificationType);
+					final String imageUrl = "https://henni-bot-app.herokuapp.com/henni_1.png";
+
+					try {
+						final UrlRichMediaAsset richMediaAsset = UrlRichMediaAsset.create(Type.IMAGE, new URL(imageUrl), Optional.of(true));
+						final RichMediaMessage richMediaMessage = RichMediaMessage.create(richMediaAsset);
+						final MessagePayload payload = MessagePayload.create(senderId, richMediaMessage);
+						messenger.send(payload);
+					} catch (MalformedURLException ex) {
+						final TextMessage textMessage = TextMessage.create(String.format("Sorry %s! Ich finde gerade keine Mösenbilder...", profile.firstName()));
+				        final MessagePayload messagePayload = MessagePayload.create(senderId, textMessage);
+						messenger.send(messagePayload);
+					}
+				}
+			}
+		} catch (MessengerApiException | MessengerIOException e) {
+			log.error(e.getMessage(), e);
+		}
 	}
 
 }
